@@ -1,7 +1,6 @@
 package com.fip.conf;
 // DirectoryConfigView.java
 
-
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -17,13 +16,12 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 
-
 /**
  * This dialog manages adding/changing directory pairs.
  * 
  * @author Fabien Ipseiz
  */
-public class DirectoryConfigView extends JFrame implements ActionListener {
+public class DirectoryConfigView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
@@ -33,21 +31,17 @@ public class DirectoryConfigView extends JFrame implements ActionListener {
 	/** The target element. */
 	private final JTextField tgtElement;
 
-	/** The directory pair to modify. */
-	private final DirectoryPair pair;
-	
 	private final JButton okButton;
 	private final JButton cancelButton;
 
+	
 	/**
 	 * Create the dialog.
 	 */
-	public DirectoryConfigView() {
+	public DirectoryConfigView(DirectoryPair pair) {
 		
 		// Get the translation object:
 		TextTranslation t = TextTranslation.getInstance();
-		
-		pair = new DirectoryPair("","");
 		
 		// Create the modal dialog:
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -94,7 +88,6 @@ public class DirectoryConfigView extends JFrame implements ActionListener {
 		okButton.setActionCommand("OK");
 		okButton.setName("OK");
 		buttonPane.add(okButton);
-		okButton.addActionListener(this);
 		//getRootPane().setDefaultButton(okButton);   
 
 		cancelButton = new JButton(t.get("button.cancel"));
@@ -102,19 +95,40 @@ public class DirectoryConfigView extends JFrame implements ActionListener {
 		cancelButton.setName("Cancel");
 		buttonPane.add(cancelButton);
 	}
-	
-	public void actionPerformed(ActionEvent event) {
-		String cmd = event.getActionCommand();
 
-		if (cmd.equals("OK")) {
-			pair.setSrc(srcElement.getText());
-			pair.setTgt(tgtElement.getText());
+	public void addButtonsListener(final ButtonsListener l) {
 
-			System.out.println("source directory : " + pair.getSrc() + "\n"
-					+ "target directory : " + pair.getTgt());
+		okButton.addActionListener(new ActionListener() {
 
-			// TODO Test for existing directory:
-		}
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				l.okPerformed(e);
+
+			}
+		});
+
+		cancelButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				l.cancelPerformed(e);
+
+			}
+		});
+	}
+
+	/**
+	 * @return the source text
+	 */
+	public String getSrcText() {
+		return srcElement.getText();
+	}
+
+	/**
+	 * @return the target text
+	 */
+	public String getTgtText() {
+		return tgtElement.getText();
 	}
 
 }

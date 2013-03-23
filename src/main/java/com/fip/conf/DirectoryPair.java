@@ -2,7 +2,6 @@ package com.fip.conf;
 // DirectoryPair.java
 
 
-
 /**
  * Represents two directories that have to be compared against each other.
  * 

@@ -1,6 +1,7 @@
 // DirectoryConfigMain.java
 package com.fip.conf;
 
+
 /**
  * Description
  *
@@ -13,7 +14,10 @@ public class DirectoryConfigMain {
 	 */
 	public static void main(String[] args) {
 		
-		DirectoryConfigView view = new DirectoryConfigView();
+		DirectoryPair pair = new DirectoryPair("","");
+		DirectoryConfigView view = new DirectoryConfigView(pair);
+		@SuppressWarnings("unused")
+		DirectoryConfigController controller = new DirectoryConfigController(pair, view);
 		
 		view.pack();
 		view.setLocation(300, 200);
