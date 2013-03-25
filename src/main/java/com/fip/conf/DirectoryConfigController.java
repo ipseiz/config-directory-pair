@@ -2,11 +2,13 @@ package com.fip.conf;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -61,7 +63,31 @@ public class DirectoryConfigController implements ButtonsListener {
 	public void cancelPerformed(ActionEvent e) {
 
 	}
+	
+	@Override
+	public void changeSrcPerformed(ActionEvent e) {
+		// Get translation object: 
+		TextTranslation t = TextTranslation.getInstance();
+		
+		JFileChooser chooser = new JFileChooser();
+		chooser.setApproveButtonText(t.get("button.select"));
+		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		chooser.setCurrentDirectory(new File(dirConfView.getSrcText()));
+		int returnVal = chooser.showOpenDialog(null);
+		chooser.setDialogTitle(t.get("profile.dir.getSrc.title"));
+		
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			// a file has been selected (button Select)
+			File file = chooser.getSelectedFile();
+            // name of the selected file
+            logger.info("Opening: " + file.getName() + ".\n");
+            dirConfView.setSrcText(file.getPath());
+        } else {
+        	logger.info("Open command cancelled by user.\n" );
+        }
+	}
 
+	
 	/**
 	 * Check if a specified file path is a folder and create a folder if it does
 	 * not exist.

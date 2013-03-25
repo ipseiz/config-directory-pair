@@ -33,6 +33,8 @@ public class DirectoryConfigView extends JFrame {
 
 	private final JButton okButton;
 	private final JButton cancelButton;
+	private  JButton changeSrcButton;
+	private  JButton changeTgtButton;
 
 	
 	/**
@@ -55,9 +57,13 @@ public class DirectoryConfigView extends JFrame {
 		JLabel srcLabel = new JLabel(t.get("profile.dir"));
 		//srcElement = new JTextField(pair.getSrc(), 40); restore the saved configuration
 		srcElement = new JTextField(40);
+		changeSrcButton = new JButton(t.get("button.change"));
+		changeSrcButton.setActionCommand("Change");
+		changeSrcButton.setName("Change");
 		JPanel srcRow1Panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		srcRow1Panel.add(srcLabel);
 		srcRow1Panel.add(srcElement);
+		srcRow1Panel.add(changeSrcButton);
 		JPanel srcRowPanel = new JPanel(new BorderLayout());
 		srcRowPanel.setBorder(new TitledBorder(t.get("profile.dir.table.src")));
 		srcRowPanel.add(srcRow1Panel, BorderLayout.NORTH);
@@ -66,9 +72,13 @@ public class DirectoryConfigView extends JFrame {
 		JLabel tgtLabel = new JLabel(t.get("profile.dir"));
 		//tgtElement = new JTextField(pair.getTgt(), 40); restore the saved configuration
 		tgtElement = new JTextField(40);
+		changeTgtButton = new JButton(t.get("button.change"));
+		changeTgtButton.setActionCommand("Change");
+		changeTgtButton.setName("Change");
 		JPanel tgtRow1Panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		tgtRow1Panel.add(tgtLabel);
 		tgtRow1Panel.add(tgtElement);
+		tgtRow1Panel.add(changeTgtButton);
 		JPanel tgtRowPanel = new JPanel(new BorderLayout());
 		tgtRowPanel.setBorder(new TitledBorder(t.get("profile.dir.table.tgt")));
 		tgtRowPanel.add(tgtRow1Panel, BorderLayout.NORTH);
@@ -115,8 +125,27 @@ public class DirectoryConfigView extends JFrame {
 
 			}
 		});
+		
+		changeSrcButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				l.changeSrcPerformed(e);
+
+			}
+		});
 	}
 
+	/**
+	 * Input the source element with the selected directory path 
+	 * 
+	 * @param dirPath
+	 *            A selected directory path.
+	 */
+	public void setSrcText(String dirPath) {
+		srcElement.setText(dirPath);
+	}
+	
 	/**
 	 * @return the source text
 	 */

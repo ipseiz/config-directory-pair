@@ -6,5 +6,6 @@ public interface ButtonsListener {
 	
 	void okPerformed(ActionEvent e);
 	void cancelPerformed(ActionEvent e);
+	void changeSrcPerformed(ActionEvent e);
 
 }
