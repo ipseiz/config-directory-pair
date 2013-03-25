@@ -44,13 +44,13 @@ public class DirectoryConfigView extends JFrame {
 		
 		// Get the translation object:
 		TextTranslation t = TextTranslation.getInstance();
-		
+
 		// Create the modal dialog:
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setTitle(t.get("profile.dir.title"));
 		setResizable(false);
 
-		//setBounds(100, 100, 450, 300);
+		// setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 
 		// Create source row:

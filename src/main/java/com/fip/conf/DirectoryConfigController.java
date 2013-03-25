@@ -61,7 +61,8 @@ public class DirectoryConfigController implements ButtonsListener {
 	
 	@Override
 	public void cancelPerformed(ActionEvent e) {
-
+		dirConfView.setVisible(false);
+		dirConfView.dispose();
 	}
 	
 	@Override
@@ -69,12 +70,13 @@ public class DirectoryConfigController implements ButtonsListener {
 		// Get translation object: 
 		TextTranslation t = TextTranslation.getInstance();
 		
+		// Create JFileChooser dialog panel:
 		JFileChooser chooser = new JFileChooser();
 		chooser.setApproveButtonText(t.get("button.select"));
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		chooser.setCurrentDirectory(new File(dirConfView.getSrcText()));
-		int returnVal = chooser.showOpenDialog(null);
 		chooser.setDialogTitle(t.get("profile.dir.getSrc.title"));
+		int returnVal = chooser.showOpenDialog(null);
 		
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			// a file has been selected (button Select)
