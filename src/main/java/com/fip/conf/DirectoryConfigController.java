@@ -79,7 +79,7 @@ public class DirectoryConfigController implements ButtonsListener {
 		int returnVal = chooser.showOpenDialog(null);
 		
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
-			// a file has been selected (Select button)
+			// a file has been selected (button Select)
 			File file = chooser.getSelectedFile();
             // name of the selected file
             logger.info("Opening: " + file.getName() + ".\n");
@@ -89,29 +89,6 @@ public class DirectoryConfigController implements ButtonsListener {
         }
 	}
 
-	@Override
-	public void changeTgtPerformed(ActionEvent e) {
-		// Get translation object: 
-		TextTranslation t = TextTranslation.getInstance();
-		
-		// Create JFileChooser dialog panel:
-		JFileChooser chooser = new JFileChooser();
-		chooser.setApproveButtonText(t.get("button.select"));
-		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-		chooser.setCurrentDirectory(new File(dirConfView.getTgtText()));
-		chooser.setDialogTitle(t.get("profile.dir.getTgt.title"));
-		int returnVal = chooser.showOpenDialog(null);
-		
-		if (returnVal == JFileChooser.APPROVE_OPTION) {
-			// a file has been selected (Select button)
-			File file = chooser.getSelectedFile();
-            // name of the selected file
-            logger.info("Opening: " + file.getName() + ".\n");
-            dirConfView.setTgtText(file.getPath());
-        } else {
-        	logger.info("Open command cancelled by user.\n" );
-        }
-	}
 	
 	/**
 	 * Check if a specified file path is a folder and create a folder if it does
@@ -132,6 +109,7 @@ public class DirectoryConfigController implements ButtonsListener {
 			JLabel msg = new JLabel(t.get("profile.dir.create.message"));
 			JLabel question = new JLabel(t.get("profile.dir.create.question"));
 			JTextField directory = new JTextField(folderPath);
+			directory.setName("directory");
 			panel.add(msg);
 			panel.add(question);
 			panel.add(directory);

@@ -57,6 +57,7 @@ public class DirectoryConfigView extends JFrame {
 		JLabel srcLabel = new JLabel(t.get("profile.dir"));
 		//srcElement = new JTextField(pair.getSrc(), 40); restore the saved configuration
 		srcElement = new JTextField(40);
+		srcElement.setName("srcElement");
 		changeSrcButton = new JButton(t.get("button.change"));
 		changeSrcButton.setActionCommand("Change");
 		changeSrcButton.setName("Change");
@@ -72,6 +73,7 @@ public class DirectoryConfigView extends JFrame {
 		JLabel tgtLabel = new JLabel(t.get("profile.dir"));
 		//tgtElement = new JTextField(pair.getTgt(), 40); restore the saved configuration
 		tgtElement = new JTextField(40);
+		tgtElement.setName("tgtElement");
 		changeTgtButton = new JButton(t.get("button.change"));
 		changeTgtButton.setActionCommand("Change");
 		changeTgtButton.setName("Change");
@@ -134,15 +136,6 @@ public class DirectoryConfigView extends JFrame {
 
 			}
 		});
-		
-		changeTgtButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				l.changeTgtPerformed(e);
-
-			}
-		});
 	}
 
 	/**
@@ -153,16 +146,6 @@ public class DirectoryConfigView extends JFrame {
 	 */
 	public void setSrcText(String dirPath) {
 		srcElement.setText(dirPath);
-	}
-	
-	/**
-	 * Input the target element with the selected directory path 
-	 * 
-	 * @param dirPath
-	 *            A selected directory path.
-	 */
-	public void setTgtText(String dirPath) {
-		tgtElement.setText(dirPath);
 	}
 	
 	/**
