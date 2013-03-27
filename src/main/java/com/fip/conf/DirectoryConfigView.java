@@ -136,10 +136,19 @@ public class DirectoryConfigView extends JFrame {
 
 			}
 		});
+
+		changeTgtButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				l.changeTgtPerformed(e);
+
+			}
+		});
 	}
 
 	/**
-	 * Input the source element with the selected directory path 
+	 * Input the source element with the selected directory path
 	 * 
 	 * @param dirPath
 	 *            A selected directory path.
@@ -147,7 +156,17 @@ public class DirectoryConfigView extends JFrame {
 	public void setSrcText(String dirPath) {
 		srcElement.setText(dirPath);
 	}
-	
+
+	/**
+	 * Input the target element with the selected directory path
+	 * 
+	 * @param dirPath
+	 *            A selected directory path.
+	 */
+	public void setTgtText(String dirPath) {
+		tgtElement.setText(dirPath);
+	}
+
 	/**
 	 * @return the source text
 	 */
@@ -161,5 +180,4 @@ public class DirectoryConfigView extends JFrame {
 	public String getTgtText() {
 		return tgtElement.getText();
 	}
-
 }

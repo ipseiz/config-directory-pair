@@ -62,7 +62,7 @@ public class GUIFunctionalTest {
 
 	@Test
 	public void shouldAddNewSrcDirPathInModelWhenClickingAddButton() {
-		final String dir = "D:\\Documents and Settings\\IPSEIZ\\My Documents\\Temp\\Source";
+		final String dir = "F:\\Utilisateurs\\Fabien\\Mes Documents\\Temp\\Source";
 		final Path dirPath = Paths.get(dir);
 		
 		// check that the model content is empty
@@ -87,7 +87,7 @@ public class GUIFunctionalTest {
 	
 	@Test
 	public void shouldAddExistingSrcDirPathInModelWhenClickingAddButton() {
-		final String dir = "D:\\Documents and Settings\\IPSEIZ\\My Documents\\Temp\\Source";
+		final String dir = "F:\\Utilisateurs\\Fabien\\Mes Documents\\Temp\\Source";
 		Path folder = Paths.get(dir);
 		
 		// check that the model content is empty
@@ -102,7 +102,7 @@ public class GUIFunctionalTest {
 	}
 	@Test
 	public void shouldAddNewTgtDirPathInModelWhenClickingAddButton() {
-		final String dir = "D:\\Documents and Settings\\IPSEIZ\\My Documents\\Temp\\Target";
+		final String dir = "F:\\Utilisateurs\\Fabien\\Mes Documents\\Temp\\Target";
 		final Path dirPath = Paths.get(dir);
 		
 		Assert.assertEquals(model.getTgt(),"","model content is not empty");
@@ -124,7 +124,7 @@ public class GUIFunctionalTest {
 	
 	@Test
 	public void shouldAddExistingTgtDirPathInModelWhenClickingAddButton() {
-		final String dir = "D:\\Documents and Settings\\IPSEIZ\\My Documents\\Temp\\Target";
+		final String dir = "F:\\Utilisateurs\\Fabien\\Mes Documents\\Temp\\Target";
 		Path folder = Paths.get(dir);
 		
 		// check that the model content is empty
@@ -140,7 +140,7 @@ public class GUIFunctionalTest {
 	
 	@Test
 	public void shouldCancelAddNewSrcDirPathInModelWhenClickingAddThenCancelButtons() {
-		final String dir = "D:\\Documents and Settings\\IPSEIZ\\Cancel";
+		final String dir = "F:\\Utilisateurs\\Fabien\\Mes Documents\\Temp\\Cancel";
 		final Path dirPath = Paths.get(dir);
 		
 		// check that the model content is empty
