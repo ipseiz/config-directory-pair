@@ -2,6 +2,7 @@
 
 package com.fip.conf;
 
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -9,8 +10,10 @@ import java.nio.file.Paths;
 import org.fest.swing.edt.FailOnThreadViolationRepaintManager;
 import org.fest.swing.edt.GuiActionRunner;
 import org.fest.swing.edt.GuiQuery;
+import org.fest.swing.finder.JFileChooserFinder;
 import org.fest.swing.finder.JOptionPaneFinder;
 import org.fest.swing.fixture.FrameFixture;
+import org.fest.swing.fixture.JFileChooserFixture;
 import org.fest.swing.fixture.JOptionPaneFixture;
 
 import org.slf4j.Logger;
@@ -65,8 +68,7 @@ public class GUIFunctionalTest {
 		final String dir = "F:\\Utilisateurs\\Fabien\\Mes Documents\\Temp\\Source";
 		final Path dirPath = Paths.get(dir);
 		
-		// check that the model content is empty
-		Assert.assertEquals(model.getSrc(),"");
+		Assert.assertEquals(model.getSrc(),"","model content is not empty");
 		Assert.assertFalse(Files.exists(dirPath),"Source directory already exist!");
 		// TODO check whether the source directory exist, if Yes => delete it
 		
@@ -90,8 +92,7 @@ public class GUIFunctionalTest {
 		final String dir = "F:\\Utilisateurs\\Fabien\\Mes Documents\\Temp\\Source";
 		Path folder = Paths.get(dir);
 		
-		// check that the model content is empty
-		Assert.assertEquals(model.getSrc(),"");
+		Assert.assertEquals(model.getSrc(),"","model content is not empty");
 		Assert.assertTrue(Files.exists(folder),"Source directory does not exist!");
 		
 		window.button("OK").requireEnabled();
@@ -127,8 +128,7 @@ public class GUIFunctionalTest {
 		final String dir = "F:\\Utilisateurs\\Fabien\\Mes Documents\\Temp\\Target";
 		Path folder = Paths.get(dir);
 		
-		// check that the model content is empty
-		Assert.assertEquals(model.getSrc(),"");
+		Assert.assertEquals(model.getSrc(),"","model content is not empty");
 		Assert.assertTrue(Files.exists(folder),"Source directory does not exist!");
 		
 		window.button("OK").requireEnabled();
@@ -143,8 +143,7 @@ public class GUIFunctionalTest {
 		final String dir = "F:\\Utilisateurs\\Fabien\\Mes Documents\\Temp\\Cancel";
 		final Path dirPath = Paths.get(dir);
 		
-		// check that the model content is empty
-		Assert.assertEquals(model.getSrc(),"");
+		Assert.assertEquals(model.getSrc(),"","model content is not empty");
 		Assert.assertFalse(Files.exists(dirPath),"Source directory already exist!");
 		// TODO check whether the source directory exist, if Yes => delete it
 		
@@ -159,6 +158,50 @@ public class GUIFunctionalTest {
 		
 		Assert.assertEquals(model.getSrc(),"","model content is not empty");
 		Assert.assertTrue(Files.notExists(dirPath),"Source directory has been created!");
+	}
+	
+	@Test
+	public void shouldChangeSrcDirPathInModelWhenClickingChangeButton() {
+		final String dir = "F:\\Utilisateurs\\Fabien\\Mes Documents\\Temp";
+		final Path dirPath = Paths.get(dir);
+		final File filePath = new File(dir);
+		
+		Assert.assertEquals(model.getSrc(),"","model content is not empty");
+		Assert.assertTrue(Files.exists(dirPath),"Source directory does not exist!");
+		// TODO check whether the source directory exist, if Yes => delete it
+		
+		window.button("Change Src").click();
+		
+		JFileChooserFixture fixture = JFileChooserFinder.findFileChooser().using(window.robot);
+		fixture.selectFile(filePath);
+		fixture.approveButton().click();
+		
+		window.button("OK").click();
+		
+		Assert.assertEquals(model.getSrc(),dir,"model content is empty");
+		//Assert.assertTrue(File(filePath),"Source directory has been created!");
+	}
+	
+	@Test
+	public void shouldChangeTgtDirPathInModelWhenClickingChangeButton() {
+		final String dir = "F:\\Utilisateurs\\Fabien\\Mes Documents\\Temp";
+		final Path dirPath = Paths.get(dir);
+		final File filePath = new File(dir);
+		
+		Assert.assertEquals(model.getTgt(),"","model content is not empty");
+		Assert.assertTrue(Files.exists(dirPath),"Source directory does not exist!");
+		// TODO check whether the source directory exist, if Yes => delete it
+		
+		window.button("Change Tgt").click();
+		
+		JFileChooserFixture fixture = JFileChooserFinder.findFileChooser().using(window.robot);
+		fixture.selectFile(filePath);
+		fixture.approveButton().click();
+		
+		window.button("OK").click();
+		
+		Assert.assertEquals(model.getTgt(),dir,"model content is empty");
+		//Assert.assertTrue(File(filePath),"Source directory has been created!");
 	}
 	
 	@Test

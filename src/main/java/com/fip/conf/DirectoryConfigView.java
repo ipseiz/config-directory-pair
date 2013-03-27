@@ -60,7 +60,7 @@ public class DirectoryConfigView extends JFrame {
 		srcElement.setName("srcElement");
 		changeSrcButton = new JButton(t.get("button.change"));
 		changeSrcButton.setActionCommand("Change");
-		changeSrcButton.setName("Change");
+		changeSrcButton.setName("Change Src");
 		JPanel srcRow1Panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		srcRow1Panel.add(srcLabel);
 		srcRow1Panel.add(srcElement);
@@ -76,7 +76,7 @@ public class DirectoryConfigView extends JFrame {
 		tgtElement.setName("tgtElement");
 		changeTgtButton = new JButton(t.get("button.change"));
 		changeTgtButton.setActionCommand("Change");
-		changeTgtButton.setName("Change");
+		changeTgtButton.setName("Change Tgt");
 		JPanel tgtRow1Panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		tgtRow1Panel.add(tgtLabel);
 		tgtRow1Panel.add(tgtElement);

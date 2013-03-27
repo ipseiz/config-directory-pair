@@ -86,33 +86,33 @@ public class DirectoryConfigController implements ButtonsListener {
             dirConfView.setSrcText(file.getPath());
         } else {
         	logger.info("Open command cancelled by user.\n" );
-		}
+        }
 	}
-
+	
 	@Override
-	public void changeTgtPerformed(ActionEvent e) {
-		// Get translation object:
-		TextTranslation t = TextTranslation.getInstance();
-
-		// Create JFileChooser dialog panel:
-		JFileChooser chooser = new JFileChooser();
-		chooser.setApproveButtonText(t.get("button.select"));
-		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-		chooser.setCurrentDirectory(new File(dirConfView.getTgtText()));
-		chooser.setDialogTitle(t.get("profile.dir.getTgt.title"));
-		int returnVal = chooser.showOpenDialog(null);
-
-		if (returnVal == JFileChooser.APPROVE_OPTION) {
-			// a file has been selected (Select button)
-			File file = chooser.getSelectedFile();
-			// name of the selected file
-			logger.info("Opening: " + file.getName() + ".\n");
-			dirConfView.setTgtText(file.getPath());
-		} else {
-			logger.info("Open command cancelled by user.\n");
-		}
+	  public void changeTgtPerformed(ActionEvent e) {
+	    // Get translation object: 
+	    TextTranslation t = TextTranslation.getInstance();
+	    
+	    // Create JFileChooser dialog panel:
+	    JFileChooser chooser = new JFileChooser();
+	    chooser.setApproveButtonText(t.get("button.select"));
+	    chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+	    chooser.setCurrentDirectory(new File(dirConfView.getTgtText()));
+	    chooser.setDialogTitle(t.get("profile.dir.getTgt.title"));
+	    int returnVal = chooser.showOpenDialog(null);
+	    
+	    if (returnVal == JFileChooser.APPROVE_OPTION) {
+	      // a file has been selected (Select button)
+	      File file = chooser.getSelectedFile();
+	            // name of the selected file
+	            logger.info("Opening: " + file.getName() + ".\n");
+	            dirConfView.setTgtText(file.getPath());
+	        } else {
+	         logger.info("Open command cancelled by user.\n" );
+	        }
 	}
-
+	
 	/**
 	 * Check if a specified file path is a folder and create a folder if it does
 	 * not exist.
