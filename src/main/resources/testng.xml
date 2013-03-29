@@ -8,11 +8,11 @@
 				and @AfterXxxx Methods) -->
 			<class name="com.fip.conf.GUIFunctionalTest">
 				<methods>
-					<exclude name="shouldAddNewSrcDirPathInModelWhenClickingAddButton" />
-					<exclude name="shouldAddExistingSrcDirPathInModelWhenClickingAddButton" />
-					<exclude name="shouldAddNewTgtDirPathInModelWhenClickingAddButton" />
-					<exclude name="shouldAddExistingTgtDirPathInModelWhenClickingAddButton" />
-					<exclude name="shouldCancelAddNewSrcDirPathInModelWhenClickingAddThenCancelButtons" />
+					<include name="shouldAddNewSrcDirPathInModelWhenClickingAddButton" />
+					<include name="shouldAddExistingSrcDirPathInModelWhenClickingAddButton" />
+					<include name="shouldAddNewTgtDirPathInModelWhenClickingAddButton" />
+					<include name="shouldAddExistingTgtDirPathInModelWhenClickingAddButton" />
+					<include name="shouldCancelAddNewSrcDirPathInModelWhenClickingAddThenCancelButtons" />
 					<include name="shouldChangeSrcDirPathInModelWhenClickingChangeButton" />
 					<include name="shouldChangeTgtDirPathInModelWhenClickingChangeButton" />
 				</methods>

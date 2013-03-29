@@ -23,6 +23,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import com.fip.conf.FileTools;
 
 
 /**
@@ -34,6 +35,7 @@ import org.testng.annotations.Test;
 public class GUIFunctionalTest {
 	private FrameFixture window;
 	private DirectoryPair model;
+	private static final Logger logger = LoggerFactory.getLogger(GUIFunctionalTest.class);
 	
 	@BeforeClass
 	public static void setUpOnce() {
@@ -67,10 +69,15 @@ public class GUIFunctionalTest {
 	public void shouldAddNewSrcDirPathInModelWhenClickingAddButton() {
 		final String dir = "F:\\Utilisateurs\\Fabien\\Mes Documents\\Temp\\Source";
 		final Path dirPath = Paths.get(dir);
+		try {
+			FileTools.deleteRecursive(dirPath);
+		} catch (Exception e) {
+			logger.error("delete error ", e);
+		}
 		
+		// check the initial context				
 		Assert.assertEquals(model.getSrc(),"","model content is not empty");
 		Assert.assertFalse(Files.exists(dirPath),"Source directory already exist!");
-		// TODO check whether the source directory exist, if Yes => delete it
 		
 		window.button("OK").requireEnabled();
 		window.textBox("srcElement").enterText(dir);
@@ -81,19 +88,24 @@ public class GUIFunctionalTest {
 		Assert.assertEquals(fixture.textBox("directory").text(),dir);
 		fixture.buttonWithText("OK").click();
 		
-		// check the model content
+		// check the model content 
 		Assert.assertEquals(model.getSrc(),dir);
-		// check whether the source directory has been created
 		Assert.assertTrue(Files.exists(dirPath),"Source directory has not been created!");
 	}
 	
 	@Test
 	public void shouldAddExistingSrcDirPathInModelWhenClickingAddButton() {
 		final String dir = "F:\\Utilisateurs\\Fabien\\Mes Documents\\Temp\\Source";
-		Path folder = Paths.get(dir);
+		final Path dirPath = Paths.get(dir);
+		try {
+			FileTools.createFolder(dir);
+		} catch (Exception e) {
+			logger.error("directory creation error ", e);
+		}
 		
+		// check the initial context
 		Assert.assertEquals(model.getSrc(),"","model content is not empty");
-		Assert.assertTrue(Files.exists(folder),"Source directory does not exist!");
+		Assert.assertTrue(Files.exists(dirPath),"Source directory does not exist!");
 		
 		window.button("OK").requireEnabled();
 		window.textBox("srcElement").enterText(dir);
@@ -105,10 +117,15 @@ public class GUIFunctionalTest {
 	public void shouldAddNewTgtDirPathInModelWhenClickingAddButton() {
 		final String dir = "F:\\Utilisateurs\\Fabien\\Mes Documents\\Temp\\Target";
 		final Path dirPath = Paths.get(dir);
+		try {
+			FileTools.deleteRecursive(dirPath);
+		} catch (Exception e) {
+			logger.error("delete error ", e);
+		}
 		
+		// check the initial context
 		Assert.assertEquals(model.getTgt(),"","model content is not empty");
 		Assert.assertFalse(Files.exists(dirPath),"Source directory already exist!");
-		// TODO check whether the source directory exist, if Yes => delete it
 		
 		window.button("OK").requireEnabled();
 		window.textBox("tgtElement").enterText(dir);
@@ -126,10 +143,16 @@ public class GUIFunctionalTest {
 	@Test
 	public void shouldAddExistingTgtDirPathInModelWhenClickingAddButton() {
 		final String dir = "F:\\Utilisateurs\\Fabien\\Mes Documents\\Temp\\Target";
-		Path folder = Paths.get(dir);
+		final Path dirPath = Paths.get(dir);
+		try {
+			FileTools.createFolder(dir);
+		} catch (Exception e) {
+			logger.error("directory creation error ", e);
+		}
 		
+		// check the initial context
 		Assert.assertEquals(model.getSrc(),"","model content is not empty");
-		Assert.assertTrue(Files.exists(folder),"Source directory does not exist!");
+		Assert.assertTrue(Files.exists(dirPath),"Source directory does not exist!");
 		
 		window.button("OK").requireEnabled();
 		window.textBox("tgtElement").enterText(dir);
@@ -142,10 +165,15 @@ public class GUIFunctionalTest {
 	public void shouldCancelAddNewSrcDirPathInModelWhenClickingAddThenCancelButtons() {
 		final String dir = "F:\\Utilisateurs\\Fabien\\Mes Documents\\Temp\\Cancel";
 		final Path dirPath = Paths.get(dir);
+		try {
+			FileTools.deleteRecursive(dirPath);
+		} catch (Exception e) {
+			logger.error("delete error ", e);
+		}
 		
+		// check the initial context
 		Assert.assertEquals(model.getSrc(),"","model content is not empty");
 		Assert.assertFalse(Files.exists(dirPath),"Source directory already exist!");
-		// TODO check whether the source directory exist, if Yes => delete it
 		
 		window.button("OK").requireEnabled();
 		window.textBox("srcElement").enterText(dir);
@@ -162,13 +190,18 @@ public class GUIFunctionalTest {
 	
 	@Test
 	public void shouldChangeSrcDirPathInModelWhenClickingChangeButton() {
-		final String dir = "F:\\Utilisateurs\\Fabien\\Mes Documents\\Temp";
+		final String dir = "F:\\Utilisateurs\\Fabien\\Mes Documents\\Temp\\Change";
 		final Path dirPath = Paths.get(dir);
 		final File filePath = new File(dir);
+		try {
+			FileTools.createFolder(dir);
+		} catch (Exception e) {
+			logger.error("directory creation error ", e);
+		}
 		
+		// check the initial context
 		Assert.assertEquals(model.getSrc(),"","model content is not empty");
 		Assert.assertTrue(Files.exists(dirPath),"Source directory does not exist!");
-		// TODO check whether the source directory exist, if Yes => delete it
 		
 		window.button("Change Src").click();
 		
@@ -179,18 +212,22 @@ public class GUIFunctionalTest {
 		window.button("OK").click();
 		
 		Assert.assertEquals(model.getSrc(),dir,"model content is empty");
-		//Assert.assertTrue(File(filePath),"Source directory has been created!");
 	}
 	
 	@Test
 	public void shouldChangeTgtDirPathInModelWhenClickingChangeButton() {
-		final String dir = "F:\\Utilisateurs\\Fabien\\Mes Documents\\Temp";
+		final String dir = "F:\\Utilisateurs\\Fabien\\Mes Documents\\Temp\\Change";
 		final Path dirPath = Paths.get(dir);
 		final File filePath = new File(dir);
+		try {
+			FileTools.createFolder(dir);
+		} catch (Exception e) {
+			logger.error("directory creation error ", e);
+		}
 		
+		// check the initial context
 		Assert.assertEquals(model.getTgt(),"","model content is not empty");
 		Assert.assertTrue(Files.exists(dirPath),"Source directory does not exist!");
-		// TODO check whether the source directory exist, if Yes => delete it
 		
 		window.button("Change Tgt").click();
 		
@@ -201,7 +238,6 @@ public class GUIFunctionalTest {
 		window.button("OK").click();
 		
 		Assert.assertEquals(model.getTgt(),dir,"model content is empty");
-		//Assert.assertTrue(File(filePath),"Source directory has been created!");
 	}
 	
 	@Test
@@ -210,5 +246,4 @@ public class GUIFunctionalTest {
 		window.button("Cancel").click();
 		// TODO check that the frame is closed
 	}
-	
 }
