@@ -35,6 +35,11 @@ import com.fip.conf.FileTools;
 public class GUIFunctionalTest {
 	private FrameFixture window;
 	private DirectoryPair model;
+	
+	private final String dir = "F:\\Utilisateurs\\Fabien\\Mes Documents\\Temp\\Test";
+	private final Path dirPath = Paths.get(dir);
+	private final File filePath = new File(dir);
+	
 	private static final Logger logger = LoggerFactory.getLogger(GUIFunctionalTest.class);
 	
 	@BeforeClass
@@ -58,6 +63,15 @@ public class GUIFunctionalTest {
 	
 		window = new FrameFixture(view);
 		window.show(); // shows the frame to test
+		
+		// delete test directory if it is exist
+		try {
+			FileTools.deleteRecursive(dirPath);
+		} catch (Exception e) {
+			logger.error("delete error ", e);
+		}
+		
+		
 	}
 
 	@AfterMethod 
@@ -67,14 +81,6 @@ public class GUIFunctionalTest {
 
 	@Test
 	public void shouldAddNewSrcDirPathInModelWhenClickingAddButton() {
-		final String dir = "F:\\Utilisateurs\\Fabien\\Mes Documents\\Temp\\Source";
-		final Path dirPath = Paths.get(dir);
-		try {
-			FileTools.deleteRecursive(dirPath);
-		} catch (Exception e) {
-			logger.error("delete error ", e);
-		}
-		
 		// check the initial context				
 		Assert.assertEquals(model.getSrc(),"","model content is not empty");
 		Assert.assertFalse(Files.exists(dirPath),"Source directory already exist!");
@@ -95,8 +101,6 @@ public class GUIFunctionalTest {
 	
 	@Test
 	public void shouldAddExistingSrcDirPathInModelWhenClickingAddButton() {
-		final String dir = "F:\\Utilisateurs\\Fabien\\Mes Documents\\Temp\\Source";
-		final Path dirPath = Paths.get(dir);
 		try {
 			FileTools.createFolder(dir);
 		} catch (Exception e) {
@@ -115,14 +119,6 @@ public class GUIFunctionalTest {
 	}
 	@Test
 	public void shouldAddNewTgtDirPathInModelWhenClickingAddButton() {
-		final String dir = "F:\\Utilisateurs\\Fabien\\Mes Documents\\Temp\\Target";
-		final Path dirPath = Paths.get(dir);
-		try {
-			FileTools.deleteRecursive(dirPath);
-		} catch (Exception e) {
-			logger.error("delete error ", e);
-		}
-		
 		// check the initial context
 		Assert.assertEquals(model.getTgt(),"","model content is not empty");
 		Assert.assertFalse(Files.exists(dirPath),"Source directory already exist!");
@@ -142,8 +138,6 @@ public class GUIFunctionalTest {
 	
 	@Test
 	public void shouldAddExistingTgtDirPathInModelWhenClickingAddButton() {
-		final String dir = "F:\\Utilisateurs\\Fabien\\Mes Documents\\Temp\\Target";
-		final Path dirPath = Paths.get(dir);
 		try {
 			FileTools.createFolder(dir);
 		} catch (Exception e) {
@@ -163,14 +157,6 @@ public class GUIFunctionalTest {
 	
 	@Test
 	public void shouldCancelAddNewSrcDirPathInModelWhenClickingAddThenCancelButtons() {
-		final String dir = "F:\\Utilisateurs\\Fabien\\Mes Documents\\Temp\\Cancel";
-		final Path dirPath = Paths.get(dir);
-		try {
-			FileTools.deleteRecursive(dirPath);
-		} catch (Exception e) {
-			logger.error("delete error ", e);
-		}
-		
 		// check the initial context
 		Assert.assertEquals(model.getSrc(),"","model content is not empty");
 		Assert.assertFalse(Files.exists(dirPath),"Source directory already exist!");
@@ -190,9 +176,6 @@ public class GUIFunctionalTest {
 	
 	@Test
 	public void shouldChangeSrcDirPathInModelWhenClickingChangeButton() {
-		final String dir = "F:\\Utilisateurs\\Fabien\\Mes Documents\\Temp\\Change";
-		final Path dirPath = Paths.get(dir);
-		final File filePath = new File(dir);
 		try {
 			FileTools.createFolder(dir);
 		} catch (Exception e) {
@@ -216,9 +199,6 @@ public class GUIFunctionalTest {
 	
 	@Test
 	public void shouldChangeTgtDirPathInModelWhenClickingChangeButton() {
-		final String dir = "F:\\Utilisateurs\\Fabien\\Mes Documents\\Temp\\Change";
-		final Path dirPath = Paths.get(dir);
-		final File filePath = new File(dir);
 		try {
 			FileTools.createFolder(dir);
 		} catch (Exception e) {

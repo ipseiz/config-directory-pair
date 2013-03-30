@@ -54,6 +54,9 @@ public class DirectoryConfigController implements ButtonsListener {
 		
 		dirPair.setSrc(srcPath);
 		dirPair.setTgt(tgtPath);
+		
+		//dirConfView.setVisible(false);
+		//dirConfView.dispose();
 
 	}
 	
@@ -141,7 +144,7 @@ public class DirectoryConfigController implements ButtonsListener {
 
 			if (selection == JOptionPane.OK_OPTION) {
 				Files.createDirectory(folder);
-			}
+			}	
 		}
 	}
 }
