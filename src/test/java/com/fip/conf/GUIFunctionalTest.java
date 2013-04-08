@@ -19,6 +19,7 @@ import org.fest.swing.fixture.JOptionPaneFixture;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -35,11 +36,15 @@ import com.fip.conf.FileTools;
 public class GUIFunctionalTest {
 	private FrameFixture window;
 	private DirectoryPair model;
-	
-	private final String dir = "F:\\Utilisateurs\\Fabien\\Mes Documents\\Temp\\Test";
-	private final Path dirPath = Paths.get(dir);
-	private final File filePath = new File(dir);
-	
+
+	// 'basedir' is a Maven variable that points to the root directory of the project
+	// File basedir specifies the directory that will serve as reference for the use
+	// of a relative location of other directories.
+	private final File basedir = new File(System.getProperty("basedir", "")).getAbsoluteFile();
+	private final File filePath = new File(basedir, "src\\test\\temp");
+	private final Path dirPath = Paths.get(filePath.getAbsolutePath());
+	private final String dir = dirPath.toString();
+
 	private static final Logger logger = LoggerFactory.getLogger(GUIFunctionalTest.class);
 	
 	@BeforeClass
@@ -64,20 +69,23 @@ public class GUIFunctionalTest {
 		window = new FrameFixture(view);
 		window.show(); // shows the frame to test
 		
+		cleanDir(); // delete test directory if it is exist
+	}
+
+	@AfterMethod
+	public void tearDown() {
+		window.cleanUp();
+	}
+
+	@AfterClass
+	public void cleanDir() {
 		// delete test directory if it is exist
 		try {
 			FileTools.deleteRecursive(dirPath);
 		} catch (Exception e) {
 			logger.error("delete error ", e);
 		}
-		
-		
 	}
-
-	@AfterMethod 
-	public void tearDown() {
-	    window.cleanUp();
-	  }
 
 	@Test
 	public void shouldAddNewSrcDirPathInModelWhenClickingAddButton() {
@@ -121,7 +129,7 @@ public class GUIFunctionalTest {
 	public void shouldAddNewTgtDirPathInModelWhenClickingAddButton() {
 		// check the initial context
 		Assert.assertEquals(model.getTgt(),"","model content is not empty");
-		Assert.assertFalse(Files.exists(dirPath),"Source directory already exist!");
+		Assert.assertFalse(Files.exists(dirPath),"Target directory already exist!");
 		
 		window.button("OK").requireEnabled();
 		window.textBox("tgtElement").enterText(dir);
@@ -133,7 +141,7 @@ public class GUIFunctionalTest {
 		fixture.buttonWithText("OK").click();
 		
 		Assert.assertEquals(model.getTgt(),dir,"model content is not correct");
-		Assert.assertTrue(Files.exists(dirPath),"Source directory has not been created!");
+		Assert.assertTrue(Files.exists(dirPath),"Target directory has not been created!");
 	}
 	
 	@Test
@@ -146,7 +154,7 @@ public class GUIFunctionalTest {
 		
 		// check the initial context
 		Assert.assertEquals(model.getSrc(),"","model content is not empty");
-		Assert.assertTrue(Files.exists(dirPath),"Source directory does not exist!");
+		Assert.assertTrue(Files.exists(dirPath),"Target directory does not exist!");
 		
 		window.button("OK").requireEnabled();
 		window.textBox("tgtElement").enterText(dir);
@@ -166,12 +174,11 @@ public class GUIFunctionalTest {
 		window.button("OK").click();
 		
 		JOptionPaneFixture fixture = JOptionPaneFinder.findOptionPane().using(window.robot);
-		Assert.assertEquals(fixture.title(),"Non-existing Directory");
-		Assert.assertEquals(fixture.textBox("directory").text(),dir);
+		Assert.assertEquals(fixture.title(),"Non-existing Directory",dir);
 		fixture.buttonWithText("Annuler").click();
 		
 		Assert.assertEquals(model.getSrc(),"","model content is not empty");
-		Assert.assertTrue(Files.notExists(dirPath),"Source directory has been created!");
+		Assert.assertTrue(Files.exists(dirPath),"Source directory has not been created!");
 	}
 	
 	@Test
