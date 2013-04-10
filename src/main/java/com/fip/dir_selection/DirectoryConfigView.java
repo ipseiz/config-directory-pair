@@ -1,4 +1,4 @@
-package com.fip.conf;
+package com.fip.dir_selection;
 // DirectoryConfigView.java
 
 import java.awt.BorderLayout;
@@ -14,6 +14,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+
+import com.fip.common.DirectoryPair;
+import com.fip.common.TextTranslation;
 
 
 /**

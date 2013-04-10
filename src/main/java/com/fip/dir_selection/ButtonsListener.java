@@ -1,4 +1,4 @@
-package com.fip.conf;
+package com.fip.dir_selection;
 
 import java.awt.event.ActionEvent;
 

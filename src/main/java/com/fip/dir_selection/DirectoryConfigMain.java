@@ -1,7 +1,9 @@
 // DirectoryConfigMain.java
-package com.fip.conf;
+package com.fip.dir_selection;
 
 import javax.swing.UIManager;
+
+import com.fip.common.DirectoryPair;
 
 
 /**

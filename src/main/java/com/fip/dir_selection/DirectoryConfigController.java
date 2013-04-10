@@ -1,4 +1,4 @@
-package com.fip.conf;
+package com.fip.dir_selection;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -16,6 +16,9 @@ import javax.swing.JTextField;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.fip.common.DirectoryPair;
+import com.fip.common.TextTranslation;
 
 // DirectoryConfigController.java
 // Handles user interaction with listeners.

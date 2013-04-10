@@ -1,4 +1,4 @@
-package com.fip.conf;
+package com.fip.common;
 // DirectoryPair.java
 
 

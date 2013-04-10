@@ -24,7 +24,11 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import com.fip.common.DirectoryPair;
 import com.fip.conf.FileTools;
+import com.fip.dir_selection.DirectoryConfigController;
+import com.fip.dir_selection.DirectoryConfigView;
 
 
 /**
