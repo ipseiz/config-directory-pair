@@ -8,7 +8,7 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 /**
- *  Translates the text of ListDirectoryView frame. 
+ *  Translates the text of config-directory-pair application. 
  *
  * @author Fabien Ipseiz
  */
