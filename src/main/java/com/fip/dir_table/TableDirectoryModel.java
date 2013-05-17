@@ -3,11 +3,6 @@
 
 package com.fip.dir_table;
 
-import java.io.IOException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 
 import javax.swing.JTable;
@@ -15,7 +10,6 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.TableColumn;
 
-import com.fip.common.DirectoryPair;
 import com.fip.common.Element;
 import com.fip.common.TextTranslation;
 
@@ -43,31 +37,31 @@ public class TableDirectoryModel extends AbstractTableModel{
 		// Create column model:
 		DefaultTableColumnModel columnModel = new DefaultTableColumnModel();
 
-		TableColumn srcFile = new TableColumn(0, 205);
+		TableColumn srcFile = new TableColumn(0, 245);
 		srcFile.setHeaderValue(t.get("compTable.src"));
 		columnModel.addColumn(srcFile);
 
-		TableColumn srcDate = new TableColumn(1, 120);
+		TableColumn srcDate = new TableColumn(1, 150);
 		srcDate.setHeaderValue(t.get("compTable.date"));
 		columnModel.addColumn(srcDate);
 
-		TableColumn srcSize = new TableColumn(2, 60);
+		TableColumn srcSize = new TableColumn(2, 80);
 		srcSize.setHeaderValue(t.get("compTable.size"));
 		columnModel.addColumn(srcSize);
 
-		//TableColumn comp = new TableColumn(3, 30);
-		//comp.setHeaderValue(t.get("compTable.action"));
-		//columnModel.addColumn(comp);
+		TableColumn comp = new TableColumn(3, 30);
+		comp.setHeaderValue(t.get("compTable.action"));
+		columnModel.addColumn(comp);
 
-		TableColumn tgtFile = new TableColumn(4, 205);
+		TableColumn tgtFile = new TableColumn(4, 245);
 		tgtFile.setHeaderValue(t.get("compTable.tgt"));
 		columnModel.addColumn(tgtFile);
 
-		TableColumn tgtDate = new TableColumn(5, 120);
+		TableColumn tgtDate = new TableColumn(5, 150);
 		tgtDate.setHeaderValue(t.get("compTable.date"));
 		columnModel.addColumn(tgtDate);
 
-		TableColumn tgtSize = new TableColumn(6, 60);
+		TableColumn tgtSize = new TableColumn(6, 80);
 		tgtSize.setHeaderValue(t.get("compTable.size"));
 		columnModel.addColumn(tgtSize);
 		
@@ -80,16 +74,6 @@ public class TableDirectoryModel extends AbstractTableModel{
 		table.getTableHeader().setReorderingAllowed(false);
 		// Set row height:
 		table.setRowHeight(table.getRowHeight() + 2);
-
-		// Add static data in the table (to test the code)
-		elements.add(new Element("Johnathan", "Sykes", "12546"));
-		elements.add(new Element("Nicolas", "Van de Kampf", "84541"));
-		elements.add(new Element("Damien", "Cuthbert", "125"));
-		elements.add(new Element("Corinne", "Valance", "9985445"));
-		elements.add(new Element("Emilie", "Schrödinger", "5896"));
-		elements.add(new Element("Delphine", "Duke", "1006"));
-		elements.add(new Element("Eric", "Trump", "856"));
-
 	}
 
 	/*
@@ -123,12 +107,10 @@ public class TableDirectoryModel extends AbstractTableModel{
          case 2:
              return elements.get(rowIndex).getSize();
          default:
-             return null; //Ne devrait jamais arriver
+             return null; // Should never happen
      }
 	}
 
-	
-	
 	public void addElement(Element element) {
 		elements.add(element);
 

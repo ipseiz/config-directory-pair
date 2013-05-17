@@ -4,8 +4,6 @@ package com.fip.dir_table;
 import javax.swing.UIManager;
 
 import com.fip.common.DirectoryPair;
-import com.fip.dir_selection.DirectoryConfigController;
-import com.fip.dir_selection.DirectoryConfigView;
 
 /**
  * Description
@@ -26,8 +24,8 @@ public class TableDirectoryMain {
 			e.printStackTrace();
 		}
 
-		DirectoryPair pair = new DirectoryPair("", "");
-		SyncTableDirectoryView view = new SyncTableDirectoryView();
+		DirectoryPair pair = new DirectoryPair("F:/Utilisateurs/Fabien/Mes documents/Java", "F:/Utilisateurs/Fabien/Mes documents/Mes recettes/");
+		SyncTableDirectoryView view = new SyncTableDirectoryView(pair);
 		
 		view.pack();
 		view.setLocation(300, 200);
