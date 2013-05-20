@@ -23,6 +23,7 @@ import org.slf4j.LoggerFactory;
 
 import com.fip.common.DirectoryPair;
 import com.fip.common.Element;
+import com.fip.common.Formatter;
 import com.fip.common.TextTranslation;
 
 /**
@@ -113,7 +114,7 @@ public class SyncTableDirectoryView extends JFrame implements ActionListener {
 		try (DirectoryStream<Path> fileList = Files.newDirectoryStream(srcFolder)) {
 			for (Path file : fileList) {
 				String newElementName = file.getFileName().toString();
-				String newElementDate = Files.getLastModifiedTime(file).toString();
+				String newElementDate = Formatter.getLastModified(file);
 				String newElementSize = String.valueOf(Files.size(file));
 				dirTableModel.addElement(new Element(newElementName,
 						newElementDate, newElementSize));
